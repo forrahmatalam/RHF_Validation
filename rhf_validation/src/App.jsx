@@ -4,18 +4,25 @@ import Usercard from './components/Usercard';
 import Form from './components/Form';
 import { useState } from 'react';
 
-function App() {
+function App( ) {
 
-  
+   const [users, setUsers] = useState([]);
 const [toggle, setToggle] = useState(false);
   
-
+console.log(users);
   return (
     <div>
          <Navbar setToggle={setToggle}/>
 <div className="h-[calc(100vh-64px)] flex justify-center items-center">
   
-{ toggle?<Usercard/>:<Form/>}
+{
+  toggle
+    ? users.map((elem , index) => {
+        return <Usercard key={index} user={elem} setToggle={setToggle} />;
+      })
+    : <Form setUsers={setUsers} setToggle={setToggle}/>
+}
+
 </div>
     </div>
     
